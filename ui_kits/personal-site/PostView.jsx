@@ -52,7 +52,7 @@ function PostView({ id, onBack }) {
 
         <div className="post-footer">
           <div className="post-footer-link" onClick={onBack}>← All writing</div>
-          <div className="post-footer-link">Subscribe →</div>
+          <button className="btn btn-cta">Subscribe</button>
         </div>
       </div>
     </main>

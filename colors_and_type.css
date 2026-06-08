@@ -35,10 +35,28 @@
   --gray-3:       #BFBFBF;
   --gray-4:       #737373;
 
-  /* Blue — sparing accent. Links, citations, key callouts. */
-  --blue:         #1B4DD8;   /* primary link / accent     */
-  --blue-hover:   #163FB0;
-  --blue-tint:    #E8EEFB;   /* highlight wash            */
+  /* ============ BLUE RAMP ============
+     One scale, two jobs:
+       • 500 is the BRAND azure (bright). Fills, marks, charts — NEVER body text.
+       • 700 is the LINK blue (AA-safe on cream). Text links, footnotes, labels.
+     Lighter steps lean azure/expressive; darker steps lean indigo/functional. */
+  --blue-50:   #EAF2FF;   /* callout / highlight wash             */
+  --blue-100:  #CFE3FF;   /* soft tint, hover wash, light chart fill */
+  --blue-300:  #8FC1FF;   /* light accent, secondary chart line   */
+  --blue-500:  #0D84FF;   /* BRAND azure — CTA fill, active dot, primary chart line */
+  --blue-600:  #0A6BD6;   /* azure pressed/hover on fills         */
+  --blue-700:  #1B4DD8;   /* LINK / text blue (AA on cream ~6.1:1) */
+  --blue-800:  #163FB0;   /* link hover / pressed text            */
+
+  /* Back-compat aliases — existing names keep resolving, nothing breaks. */
+  --blue:         var(--blue-700);
+  --blue-hover:   var(--blue-800);
+  --blue-tint:    var(--blue-50);
+
+  /* Expressive brand accent (semantic) */
+  --accent:       var(--blue-500);
+  --accent-hover: var(--blue-600);
+  --accent-wash:  var(--blue-50);
 
   /* Semantic surfaces — map to cream by default. */
   --bg:           var(--cream);
@@ -51,8 +69,8 @@
   --fg-3:         var(--ink-3);  /* tertiary     */
   --fg-4:         var(--ink-4);  /* quaternary   */
 
-  --link:         var(--blue);
-  --link-hover:   var(--blue-hover);
+  --link:         var(--blue-700);
+  --link-hover:   var(--blue-800);
 
   /* ============ TYPOGRAPHY ============ */
   --serif:  'DM Serif Display', 'Iowan Old Style', Georgia, 'Times New Roman', serif;

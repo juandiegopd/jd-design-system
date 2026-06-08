@@ -51,7 +51,7 @@ function CompanyLanding() {
 
         <section className="cl-cta">
           <div className="cl-cta-text">If any of this is wrong, I'd like to hear why.</div>
-          <a className="btn btn-blue" href="#">Book fifteen minutes →</a>
+          <a className="btn btn-cta" href="#">Book fifteen minutes →</a>
         </section>
       </div>
     </main>
