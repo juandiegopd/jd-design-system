@@ -2,32 +2,49 @@
    JD Peñaherrera — Design Tokens
    Colors + Type for personal site, blog, and company landing pages.
    --------------------------------------------------------------------------
-   Aesthetic: editorial, quiet, mostly monochrome. Cream paper + ink text.
-   Inspired by personal essays, technical journals, and well-set typography.
+   Aesthetic: editorial, precise, cool-navy on paper white.
+   Folio design language: Newsreader serif · Public Sans grotesque · IBM Plex Mono.
+   Inspired by financial journalism and well-set editorial type.
    ========================================================================== */
 
 /* ---------- FONTS (Google Fonts) ---------- */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  /* ============ BASE COLOR PALETTE ============
-     The cream/ink scale is the canonical surface.
-     Pure b&w is available for tighter, more technical contexts.
-     Blue is the ONLY hue — used sparingly for links + accents.        */
+  /* ============ FOLIO PALETTE ============
+     Two surfaces: paper (near-white) and the navy ink scale.
+     Blue is the ONLY hue — one 8-step ramp for fills, marks, and links.  */
 
-  /* Cream — warm paper. The default background family. */
-  --cream:        #F8F7F4;   /* page background           */
-  --cream-2:      #EFEDE8;   /* hovered surface / chip    */
-  --cream-3:      #E0DDD7;   /* hairline borders          */
-  --cream-4:      #C9C5BD;   /* divider on dark bg        */
+  /* Paper — cool near-white. The default page background. */
+  --paper:        #FAFDFF;
+  --surface-100:  #F2F3F9;   /* elevated surface / chip       */
 
-  /* Ink — warm near-black. The default text family. */
-  --ink:          #1C1B19;   /* headings, primary text    */
-  --ink-2:        #4A4641;   /* secondary text            */
-  --ink-3:        #6B6861;   /* meta, captions            */
-  --ink-4:        #9A9088;   /* labels, disabled          */
+  /* Navy — the primary text and ink scale. */
+  --ink-900:      #00172E;   /* primary text / headings       */
+  --ink-850:      #05162C;   /* deep surface (chart panels)   */
+  --ink-700:      #002B57;   /* secondary text                */
 
-  /* True monochrome — for sub-landing pages that want crisper b&w. */
+  /* Slate — muted UI chrome. */
+  --slate-600:    #597597;   /* tertiary text / labels        */
+  --slate-500:    #798594;   /* captions / disabled           */
+
+  /* ---- Back-compat aliases (old names → new values) ----
+     All existing component code keeps resolving without edits. */
+  --cream:        var(--paper);
+  --cream-2:      var(--surface-100);
+  --cream-3:      rgba(0,23,46,0.10);   /* border-subtle  */
+  --cream-4:      rgba(0,23,46,0.22);   /* border-strong  */
+  --ink:          var(--ink-900);
+  --ink-2:        var(--ink-700);
+  --ink-3:        var(--slate-600);
+  --ink-4:        var(--slate-500);
+
+  /* ---- Border tokens (semantic, use these in new code) ---- */
+  --border-subtle:  rgba(0,23,46,0.10);
+  --border-strong:  rgba(0,23,46,0.22);
+  --rule:           rgba(0,23,46,0.14);
+
+  /* True monochrome — for sub-pages that want crisper b&w. */
   --black:        #0A0A0A;
   --white:        #FFFFFF;
   --gray-1:       #F4F4F4;
@@ -38,17 +55,17 @@
   /* ============ BLUE RAMP ============
      One scale, two jobs:
        • 500 is the BRAND azure (bright). Fills, marks, charts — NEVER body text.
-       • 700 is the LINK blue (AA-safe on cream). Text links, footnotes, labels.
+       • 700 is the LINK blue (AA-safe on paper ~6.1:1). Text links, labels.
      Lighter steps lean azure/expressive; darker steps lean indigo/functional. */
   --blue-50:   #EAF2FF;   /* callout / highlight wash             */
   --blue-100:  #CFE3FF;   /* soft tint, hover wash, light chart fill */
   --blue-300:  #8FC1FF;   /* light accent, secondary chart line   */
   --blue-500:  #0D84FF;   /* BRAND azure — CTA fill, active dot, primary chart line */
   --blue-600:  #0A6BD6;   /* azure pressed/hover on fills         */
-  --blue-700:  #1B4DD8;   /* LINK / text blue (AA on cream ~6.1:1) */
+  --blue-700:  #1B4DD8;   /* LINK / text blue (AA on paper ~6.1:1) */
   --blue-800:  #163FB0;   /* link hover / pressed text            */
 
-  /* Back-compat aliases — existing names keep resolving, nothing breaks. */
+  /* Back-compat aliases */
   --blue:         var(--blue-700);
   --blue-hover:   var(--blue-800);
   --blue-tint:    var(--blue-50);
@@ -58,62 +75,65 @@
   --accent-hover: var(--blue-600);
   --accent-wash:  var(--blue-50);
 
-  /* Semantic surfaces — map to cream by default. */
-  --bg:           var(--cream);
-  --bg-elevated:  var(--cream-2);
-  --border:       var(--cream-3);
-  --border-strong:var(--ink-4);
+  /* Semantic surfaces */
+  --bg:           var(--paper);
+  --bg-elevated:  var(--surface-100);
+  --border:       var(--border-subtle);
+  --border-strong-alias: var(--border-strong);
 
-  --fg-1:         var(--ink);    /* primary text */
-  --fg-2:         var(--ink-2);  /* secondary    */
-  --fg-3:         var(--ink-3);  /* tertiary     */
-  --fg-4:         var(--ink-4);  /* quaternary   */
+  --fg-1:         var(--ink-900);   /* primary text */
+  --fg-2:         var(--ink-700);   /* secondary    */
+  --fg-3:         var(--slate-600); /* tertiary     */
+  --fg-4:         var(--slate-500); /* quaternary   */
 
   --link:         var(--blue-700);
   --link-hover:   var(--blue-800);
 
   /* ============ TYPOGRAPHY ============ */
-  --serif:  'DM Serif Display', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
-  --sans:   'DM Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  --mono:   'DM Mono', 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  --serif:  'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans:   'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+  --mono:   'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
-  /* Type scale — editorial. Reads like a journal. */
+  /* Type scale */
   --fs-display: clamp(2.75rem, 5.5vw, 4.5rem);   /* hero name      */
   --fs-h1:      clamp(2rem, 3.6vw, 3rem);        /* article title  */
   --fs-h2:      clamp(1.5rem, 2.4vw, 2rem);      /* section head   */
   --fs-h3:      1.25rem;                         /* subsection     */
-  --fs-body:    1rem;                            /* paragraph      */
+  --fs-body:    0.97rem;                         /* paragraph      */
   --fs-small:   0.875rem;                        /* meta           */
   --fs-mono:    0.75rem;                         /* labels         */
   --fs-mono-sm: 0.6875rem;                       /* nav, eyebrow   */
 
   --lh-tight:   1.05;
   --lh-snug:    1.25;
-  --lh-body:    1.6;
+  --lh-body:    1.7;
   --lh-loose:   1.75;
 
-  --tracking-mono:  0.10em;   /* eyebrow / nav labels */
-  --tracking-tight: -0.01em;  /* display headings     */
+  --tracking-display: -0.03em;   /* serif display headings   */
+  --tracking-tight:   -0.015em;  /* serif body headings      */
+  --tracking-mono:     0.06em;   /* eyebrow / nav labels     */
+  --tracking-eyebrow:  0.06em;   /* alias                    */
 
   /* ============ SPACING / SHAPE ============ */
-  --radius-sm:  3px;
-  --radius:     6px;
-  --radius-lg:  10px;
+  /* Square corners — Folio uses no radius. Keep tokens for flexibility. */
+  --radius-sm:  0px;
+  --radius:     0px;
+  --radius-lg:  0px;
 
   --space-1: 0.25rem;  --space-2: 0.5rem;  --space-3: 0.75rem;
   --space-4: 1rem;     --space-5: 1.25rem; --space-6: 1.5rem;
   --space-8: 2rem;     --space-10:2.5rem;  --space-12:3rem;
   --space-16:4rem;     --space-20:5rem;    --space-24:6rem;
 
-  /* Quiet shadows — almost imperceptible, used only on rare elevated chips. */
-  --shadow-1: 0 1px 2px rgba(28, 27, 25, 0.04);
-  --shadow-2: 0 4px 16px rgba(28, 27, 25, 0.06);
+  /* Shadows — minimal on a navy-on-paper system */
+  --shadow-1: 0 1px 2px rgba(0,23,46,0.05);
+  --shadow-2: 0 4px 16px rgba(0,23,46,0.08);
 
   /* Motion */
-  --ease:        cubic-bezier(.2,.6,.2,1);
-  --dur-fast:    120ms;
-  --dur:         200ms;
-  --dur-slow:    420ms;
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast:    140ms;
+  --dur:         240ms;
+  --dur-slow:    400ms;
 }
 
 /* ---------- BASE ELEMENT STYLES (semantic) ---------- */
@@ -130,14 +150,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: var(--tracking-tight); color: var(--fg-1); }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; letter-spacing: var(--tracking-display); color: var(--fg-1); }
 h1 { font-size: var(--fs-h1); line-height: var(--lh-snug); }
 h2 { font-size: var(--fs-h2); line-height: var(--lh-snug); }
-h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); font-family: var(--sans); font-weight: 500; letter-spacing: 0; }
-h4 { font-size: var(--fs-body); font-family: var(--sans); font-weight: 500; }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); font-family: var(--sans); font-weight: 600; letter-spacing: 0; }
+h4 { font-size: var(--fs-body); font-family: var(--sans); font-weight: 600; }
 
-.display { font-family: var(--serif); font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); }
-.display em { font-style: italic; color: var(--fg-2); }
+.display { font-family: var(--serif); font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tracking-display); font-weight: 500; }
+.display em { font-style: italic; }
 
 p { line-height: var(--lh-body); color: var(--fg-2); max-width: 65ch; }
 p + p { margin-top: 1em; }
@@ -145,32 +165,31 @@ p + p { margin-top: 1em; }
 a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color var(--dur) var(--ease); }
 a:hover { color: var(--link-hover); }
 
-em, .italic-serif { font-family: var(--serif); font-style: italic; color: var(--fg-2); }
-strong { font-weight: 500; color: var(--fg-1); }
+em, .italic-serif { font-family: var(--serif); font-style: italic; }
+strong { font-weight: 600; color: var(--fg-1); }
 
 small, .meta { font-size: var(--fs-small); color: var(--fg-3); }
 
 code, kbd, pre {
   font-family: var(--mono);
   font-size: 0.9em;
-  background: var(--cream-2);
+  background: var(--surface-100);
   padding: 0.1em 0.35em;
-  border-radius: var(--radius-sm);
-  color: var(--ink-2);
+  color: var(--ink-700);
 }
 pre { padding: 1rem 1.25rem; line-height: 1.55; overflow-x: auto; }
 
-/* Eyebrow / label — used everywhere for nav, section labels, dates. */
+/* Eyebrow / label */
 .eyebrow, .label-mono {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--fs-mono-sm);
-  font-weight: 500;
-  letter-spacing: var(--tracking-mono);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--fg-3);
+  color: var(--accent);
 }
 
-/* Tagline / pull quote — italic serif. */
+/* Tagline / pull quote */
 .tagline {
   font-family: var(--serif);
   font-style: italic;
@@ -181,4 +200,4 @@ pre { padding: 1rem 1.25rem; line-height: 1.55; overflow-x: auto; }
 
 hr { border: 0; border-top: 1px solid var(--border); margin: var(--space-8) 0; }
 
-::selection { background: var(--ink); color: var(--cream); }
+::selection { background: var(--ink-900); color: var(--paper); }
